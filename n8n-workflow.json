@@ -1,0 +1,545 @@
+{
+  "name": "GameofCrores Video Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Market Open (6 AM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [250, 300],
+      "id": "schedule-market-open"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 11 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Midday (11 AM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [250, 500],
+      "id": "schedule-midday"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 15 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Market Close (3 PM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [250, 700],
+      "id": "schedule-close"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 18 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Global (6 PM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [250, 900],
+      "id": "schedule-global"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 21 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule - Preview (9 PM)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [250, 1100],
+      "id": "schedule-preview"
+    },
+    {
+      "parameters": {
+        "command": "cd /home/gameofcrores && node src/scripts/createVideo.js market_open"
+      },
+      "name": "Execute - Market Open",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 300],
+      "id": "exec-market-open"
+    },
+    {
+      "parameters": {
+        "command": "cd /home/gameofcrores && node src/scripts/createVideo.js midday"
+      },
+      "name": "Execute - Midday",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 500],
+      "id": "exec-midday"
+    },
+    {
+      "parameters": {
+        "command": "cd /home/gameofcrores && node src/scripts/createVideo.js market_close"
+      },
+      "name": "Execute - Market Close",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 700],
+      "id": "exec-close"
+    },
+    {
+      "parameters": {
+        "command": "cd /home/gameofcrores && node src/scripts/createVideo.js global"
+      },
+      "name": "Execute - Global",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 900],
+      "id": "exec-global"
+    },
+    {
+      "parameters": {
+        "command": "cd /home/gameofcrores && node src/scripts/createVideo.js preview"
+      },
+      "name": "Execute - Preview",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 1100],
+      "id": "exec-preview"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.code}}",
+              "operation": "equals",
+              "value2": "0"
+            }
+          ]
+        }
+      },
+      "name": "Check Success - Market Open",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [750, 300],
+      "id": "check-market-open"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.code}}",
+              "operation": "equals",
+              "value2": "0"
+            }
+          ]
+        }
+      },
+      "name": "Check Success - Midday",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [750, 500],
+      "id": "check-midday"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.code}}",
+              "operation": "equals",
+              "value2": "0"
+            }
+          ]
+        }
+      },
+      "name": "Check Success - Market Close",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [750, 700],
+      "id": "check-close"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.code}}",
+              "operation": "equals",
+              "value2": "0"
+            }
+          ]
+        }
+      },
+      "name": "Check Success - Global",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [750, 900],
+      "id": "check-global"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.code}}",
+              "operation": "equals",
+              "value2": "0"
+            }
+          ]
+        }
+      },
+      "name": "Check Success - Preview",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [750, 1100],
+      "id": "check-preview"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "✅ GameofCrores: Market Open video published successfully!\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Success - Market Open",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 250],
+      "id": "success-market-open"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "✅ GameofCrores: Midday video published successfully!\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Success - Midday",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 450],
+      "id": "success-midday"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "✅ GameofCrores: Market Close video published successfully!\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Success - Market Close",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 650],
+      "id": "success-close"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "✅ GameofCrores: Global Markets video published successfully!\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Success - Global",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 850],
+      "id": "success-global"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "✅ GameofCrores: Preview video published successfully!\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Success - Preview",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 1050],
+      "id": "success-preview"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "❌ GameofCrores: Market Open video FAILED!\n\nError: {{$json.stderr}}\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Error - Market Open",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 350],
+      "id": "error-market-open"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "❌ GameofCrores: Midday video FAILED!\n\nError: {{$json.stderr}}\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Error - Midday",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 550],
+      "id": "error-midday"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "❌ GameofCrores: Market Close video FAILED!\n\nError: {{$json.stderr}}\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Error - Market Close",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 750],
+      "id": "error-close"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "❌ GameofCrores: Global Markets video FAILED!\n\nError: {{$json.stderr}}\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Error - Global",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 950],
+      "id": "error-global"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "message": "❌ GameofCrores: Preview video FAILED!\n\nError: {{$json.stderr}}\n\nCheck logs at: /home/gameofcrores/logs/"
+      },
+      "name": "Log Error - Preview",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1000, 1150],
+      "id": "error-preview"
+    }
+  ],
+  "connections": {
+    "Schedule - Market Open (6 AM)": {
+      "main": [
+        [
+          {
+            "node": "Execute - Market Open",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule - Midday (11 AM)": {
+      "main": [
+        [
+          {
+            "node": "Execute - Midday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule - Market Close (3 PM)": {
+      "main": [
+        [
+          {
+            "node": "Execute - Market Close",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule - Global (6 PM)": {
+      "main": [
+        [
+          {
+            "node": "Execute - Global",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule - Preview (9 PM)": {
+      "main": [
+        [
+          {
+            "node": "Execute - Preview",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute - Market Open": {
+      "main": [
+        [
+          {
+            "node": "Check Success - Market Open",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute - Midday": {
+      "main": [
+        [
+          {
+            "node": "Check Success - Midday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute - Market Close": {
+      "main": [
+        [
+          {
+            "node": "Check Success - Market Close",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute - Global": {
+      "main": [
+        [
+          {
+            "node": "Check Success - Global",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute - Preview": {
+      "main": [
+        [
+          {
+            "node": "Check Success - Preview",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success - Market Open": {
+      "main": [
+        [
+          {
+            "node": "Log Success - Market Open",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error - Market Open",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success - Midday": {
+      "main": [
+        [
+          {
+            "node": "Log Success - Midday",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error - Midday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success - Market Close": {
+      "main": [
+        [
+          {
+            "node": "Log Success - Market Close",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error - Market Close",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success - Global": {
+      "main": [
+        [
+          {
+            "node": "Log Success - Global",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error - Global",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Success - Preview": {
+      "main": [
+        [
+          {
+            "node": "Log Success - Preview",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Error - Preview",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "timezone": "Asia/Kolkata"
+  }
+}
